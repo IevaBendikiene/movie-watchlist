@@ -12,7 +12,7 @@ const Watchedlist = ({movie, type}) => {
       </div>
       {watched.length > 0 ? (<div className="movie-grid">
           {watched.map(movie => (
-              <MovieCard movie={movie} type='watched'/>
+              <MovieCard movie={movie} key={movie.id} type='watched'/>
           ))}
       </div>) : (
           <h2 className='no-movies'>No movies in watched list.</h2>

@@ -4,7 +4,10 @@ import { GlobalContext } from '../cotext/GlobalState'
 
 export default function Movies ({movie}) {
 
-const { watchlist, watched, addMovieToWatchlist,  addMovieToWatched } = useContext(GlobalContext)
+const { watchlist, 
+        watched,
+        addMovieToWatchlist,  addMovieToWatched 
+} = useContext(GlobalContext)
 
 let storedMovie = watchlist.find(o => o.id === movie.id)
 let storedMovieWatched = watched.find((o) => o.id === movie.id)
@@ -28,21 +31,23 @@ const watchlistDisabled = storedMovie
                 <div className="filler-poster"></div>
             )}
          </div>
-          <div className="info">
-              <h3 className="title">{movie.title}</h3>
-              <h4 className="release-date">{movie.release_date ? movie.release_date.substring(0,4) : "."}</h4> 
-          </div> 
-          <div className="controls">   
-              <button className="btn"
-                  disabled ={watchlistDisabled}
-                  onClick={() => addMovieToWatchlist(movie)}>  
-                Add to Watchlist
-              </button>
-              <button className="btn"
-                  disabled={watchedDisabled}
-                  onClick={() => addMovieToWatched(movie)}>  
-                Add to Watched
-              </button>
+         <div className='about-movie'>
+            <div className="info">
+                <h3 className="title">{movie.title}</h3>
+                <h4 className="release-date">{movie.release_date ? movie.release_date.substring(0,4) : "."}</h4> 
+            </div> 
+            <div className="controls">   
+                <button className="btn"
+                    disabled ={watchlistDisabled}
+                    onClick={() => addMovieToWatchlist(movie)}>  
+                  Add to Watchlist
+                </button>
+                <button className="btn"
+                    disabled={watchedDisabled}
+                    onClick={() => addMovieToWatched(movie)}>  
+                  Add to Watched
+                </button>
+            </div>
           </div>   
     </div>
   )

@@ -24,6 +24,7 @@ export default (state, action) => {
             };  
         case "REMOVE_MOVIE_FROM_WATCHED":
             return {
+                ...state,
                 watched: state.watched.filter((movie) => movie.id !== action.payload)
             };       
         default:

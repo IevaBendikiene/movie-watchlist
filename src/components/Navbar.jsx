@@ -4,16 +4,16 @@ const Navbar = () => {
   return (
     <header>
         <div className="container">
-            <div className="inner-cotainer">
+            <div className="inner-container">
                 <div className="brand">
-                    <Link to="/">Watchlist</Link>
+                    <Link to="/">World of movies</Link>
                 </div>
-                <ul>
+                <ul className='navbar'>
                     <li>
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/watchlist">Watch List</Link>
+                        <Link to="/watchlist">Watch-List</Link>
                     </li>
                     <li>
                         <Link to="/watched">Watched</Link>

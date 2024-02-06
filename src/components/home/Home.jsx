@@ -28,7 +28,7 @@ function App() {
   }
 
   
-// Show 10 best movies when page is loaded
+// Show 10 top rated movies when page is loaded
   useEffect(() => {
     axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${myKey}`)
       .then((response) => {
@@ -73,40 +73,38 @@ const handleChosenGenre=() =>{
 if (error) return <p>An error occurred</p>
 
   return (
-    <div className="container">
+    <div className="home container">
       <h1>Find movies for your movie-night!</h1>
-      <div>
-        <label htmlFor="">Movie name </label>
-        <input type="text" id='nameInput' ref={inputoRef}/>
-        <button onClick={buttonHandler}>Search movie</button>
-            {myMovies.map((movie) =>(
-          <Movies key={movie.id} movie={movie} />
-        ))}
+      <div className="inner-container">
+            <input type="text" id='nameInput' ref={inputoRef} placeholder='search for a movie'/>
+                  
+              <select
+              value={chosenGenre}
+              onChange ={(e) => {
+                setChosenGenre(e.target.value)
+                handleChosenGenre(e.target.value)
+              }}>
+                <option >Choose movie by genre</option>
+                {genres.map((genre) => (
+                    <option key={genre.id} value={genre.id}>
+                      {genre.name}
+                    </option>
+                    ))
+              }
+              </select> 
+              <button onClick={buttonHandler}>Search movie</button>    
       </div>
-      <div>
-          <select
-           value={chosenGenre}
-           onChange ={(e) => {
-            setChosenGenre(e.target.value)
-            handleChosenGenre(e.target.value)
-           }}>
-            <option >Choose movie genre</option>
-             {genres.map((genre) => (
-                <option key={genre.id} value={genre.id}>
-                  {genre.name}
-                </option>
-                ))
-          }
-          </select>
+      <div className='movie-container'>
+          {myMovies.map((movie) =>(
+              <Movies key={movie.id} movie={movie} />
+            ))}
           {moviesByGenre.map((movie) => (
-            <Movies key={movie.id} movie={movie} />
-          ))}
+                <Movies key={movie.id} movie={movie} />
+              ))}
+          {bestMovieS.slice(0,10).map((bestmovie) => (
+              <Movies key={bestmovie.id} movie={bestmovie}/>
+            ))}
       </div>
-      <div className='top-rated'>
-        {bestMovieS.slice(0,10).map((bestmovie) => (
-          <Movies key={bestmovie.id} movie={bestmovie}/>
-        ))}
-      </div>  
     </div>
   );
 }
